@@ -1,44 +1,74 @@
 #!/bin/bash
 
+function sign_in()
+{
+    echo "Enter username :"
+    read user </dev/tty
+
+    # to check if username exists or not
+    echo "Enter Password :"
+    read pass </dev/tty
+
+        #to check if password is correct
+    while IFS='#' read -r username password
+    do
+        if [ "$pass" = "$password" ] && [ "$username" = "$user" ]
+        then
+            echo "Sign-in Successful.."
+            echo "Now choose your option.."
+            echo "
+                1. Take a test
+                2. Exit"
+        
+            read var </dev/tty
+
+            if [$var -eq 1 ]
+            then
+                echo "Test starting.."
+            
+            else 
+                echo "Exiting.."
+                exit
+            fi
+
+        fi
+    done <data.txt
+    echo "Wrong credentials.."
+    echo "Please sign-in again.."
+    sign_in
+
+
+}
+
+
+
 function signup()
 {
 echo "Enter Username :"
 read name
 # also to check if username already exist
-echo $name >> data.txt
+while IFS='#' read -r username password
+do
+    if [ "$username" = "$name" ]
+    then
+        echo "Username already exists.."
+        echo "Please sign-in.."
+        sign_in
+
+    fi
+done <data.txt
+
+# echo $name >> data.txt
 echo "Enter your password :"
 read password
-echo $password >> data.txt
+# echo $password >> data.txt
+
+user="${name}#${password}"
+echo $user >> data.txt
 
 }
 
-function sign_in()
-{
-    echo "Enter username :"
-    read name
-    # to check if username exists or not
-    echo "Enter Password :"
-    read Password
 
-    echo "Please Re-enter password.."
-    read password
-
-    #to check if password is correct
-
-    echo "Sign-in Successful.."
-    echo "Now choose your option.."
-    echo "
-          1. Take a test
-          2. View a test
-          3. Exit"
-
-    read var 
-    if [$var -eq 1]
-    then
-        echo "Your test is going to start.."
-    #command to start test..
-    fi
-}
 
 function main_menu()
 {
@@ -72,6 +102,8 @@ function main_menu()
 
 
 main_menu
+
+
 
 
 
