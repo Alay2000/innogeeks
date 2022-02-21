@@ -24,7 +24,7 @@ function sign_in()
             if [ $var -eq 1 ]
             then
                 echo "Test starting.."
-                sh quiz.sh
+                ./quiz.sh
             else 
                 echo "Exiting.."
                 exit
