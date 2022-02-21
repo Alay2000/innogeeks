@@ -2,10 +2,10 @@
 
 function sign_in()
 {
+    clear
     echo "Enter username :"
     read user </dev/tty
 
-    # to check if username exists or not
     echo "Enter Password :"
     read pass </dev/tty
 
@@ -21,11 +21,10 @@ function sign_in()
                 2. Exit"
         
             read var </dev/tty
-
-            if [$var -eq 1 ]
+            if [ $var -eq 1 ]
             then
                 echo "Test starting.."
-            
+                sh quiz.sh
             else 
                 echo "Exiting.."
                 exit
@@ -35,6 +34,7 @@ function sign_in()
     done <data.txt
     echo "Wrong credentials.."
     echo "Please sign-in again.."
+    clear
     sign_in
 
 
@@ -44,6 +44,7 @@ function sign_in()
 
 function signup()
 {
+clear
 echo "Enter Username :"
 read name
 # also to check if username already exist
@@ -80,7 +81,6 @@ function main_menu()
           2. Sign in
           3. Exit"
     echo "Enter your option :"
-
     read num
 
     if [ $num -eq 1 ]

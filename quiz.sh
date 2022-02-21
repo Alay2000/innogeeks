@@ -2,7 +2,7 @@
 clear
 echo
 echo "Enter your full name"
-read name
+read uname </dev/tty
 clear
 echo "Welcome $name"
 echo "Take a breath !!! You quiz will start in "
@@ -18,14 +18,14 @@ file='quiz.txt'
 noofque=0
 i=1
 echo "===========   Answer Wisely   ============="
-while read line 
+while IFS= read -r line 
 do
-    if (($i % 3 != 0))
+    if (( $i % 3 != 0 ))
     then
         echo $line
     else    
         noofque=$((noofque + 1))
-        echo "Enter option a/b"
+        echo "Enter option a/b/c/d"
         read ans < /dev/tty
         if [ "$line" = "$ans" ]
         then
@@ -40,7 +40,7 @@ done < $file
 clear
 echo "======= Quiz completed =========="
 echo "Results"
-echo "Given by: $name"
+echo "Given by: $uname"
 echo "Start Time : $quizstarttime"
 echo "Marks : $score / $noofque"
 
